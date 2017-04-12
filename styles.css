@@ -1,0 +1,43 @@
+#wrapper{
+    width:800px;
+    margin: 0 auto;
+    background-color: white !important;
+    text-align: center;
+}
+
+body{
+font-family: "Serif";
+font-size: 16px;
+color:black;
+font-weight: 100;
+padding-left: .5em;
+padding-bottom: 1em;
+line-height: 115%;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h2{
+   font-size: 24px;
+    font-weight:bold;
+}
+
+.speciesTable{
+    text-align: center;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+td,th{
+    padding: .25em;
+    text-align: center;
+
+}
+
+.cartButton{
+    float: right;
+    margin-right: 5em;
+}
