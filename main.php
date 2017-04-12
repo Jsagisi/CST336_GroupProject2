@@ -47,56 +47,84 @@ function printOut($animal)
     global $dogs, $cats, $fishs;
     if ($animal == 'fish')
     {
+        echo "<table class= 'speciesTable'>";
+        echo "<tr>";
+        echo "<th>Species</th>";
+        echo "<th>Gender</th>";
+        echo "</tr>";
         foreach($fishs as $record)
         {
+            echo "<tr>";
             $petId = "fish_".$record['fishid'];
             
             echo "<form action='cart.php'>";
            
-            echo $record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10); 
-           
+            echo "<td>". $record['breed']."</td><td>".$record['gender']."</td>"; 
+           echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
             echo "</form>";
+            echo "</td>";
             
-            echo "</br>";
+            echo "</tr>";
         }
+        echo "</table>";
     }
     else if ($animal == 'dog')
         {
+        echo "<table class= 'speciesTable'>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Breed</th>";
+        echo "<th>Gender</th>";
+        echo "<th>Age (Years)</th>";
+        echo "</tr>";
         foreach($dogs as $record)
         {
+            echo "<tr>";
             $petId = "dog_".$record['dogid'];
             
             echo "<form action='cart.php'>";
             
-            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'].str_repeat('&nbsp;', 10);
+            echo "<td>" .$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
+            echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
             echo "</form>";
+            echo "</td>";
             
-            echo "</br>";
+            echo "</tr>";
         }
-        echo "<hr> </br>";
+        echo "</table><hr></br>";
     }
     else if ($animal == 'cat')
         {
+            echo "<table class= 'speciesTable'>";
+        echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Breed</th>";
+        echo "<th>Gender</th>";
+        echo "<th>Age (Years)</th>";
+        echo "</tr>";
         foreach($cats as $record)
         {
+            echo "<tr>";
             $petId = "cat_".$record['catid'];
             
             echo "<form action='cart.php'>";
 
-            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'].str_repeat('&nbsp;', 10);
+            echo "<td>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
+            echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
             echo "</form>";
+            echo "</td>";
             
-            echo "</br>";
+            echo "</tr>";
         }
-        echo "<hr> </br>";
+        echo "</table><hr> </br>";
     }
 }
 
@@ -106,13 +134,26 @@ function printOut($animal)
     <head>
         <title> Animal Shelter </title>
     </head>
+    
+         <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     
+    <style> @import url("styles.css"); </style>
+    
     <body>
+        <div id= "wrapper">
         <h1>
             Pets
         </h1>
         
         <form action="cart.php">
-            <input type="submit" value="Adoption Cart">
+            <input type="submit" value="Adoption Cart" class= "cartButton">
         </form>
             
             </br>
@@ -126,6 +167,6 @@ function printOut($animal)
         <?=printOut(cat)?>
         <h2>Fish</h2>
         <?=printOut(fish)?>
-        
+        </div>
     </body>
 </html>
