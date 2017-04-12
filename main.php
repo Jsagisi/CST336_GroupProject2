@@ -49,27 +49,54 @@ function printOut($animal)
     {
         foreach($fishs as $record)
         {
-            echo $record['breed'].str_repeat('&nbsp;', 10).$record['gender'];
-            echo "<br>";
+            $petId = "fish_".$record['fishid'];
+            
+            echo "<form action='cart.php'>";
+           
+            echo $record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10); 
+           
+            echo "<input type='hidden' name='petId' value='".$petId."'>";                
+            echo "<input type='submit' value='Add to Cart'>";
+            echo "</form>";
+            
+            echo "</br>";
         }
     }
     else if ($animal == 'dog')
         {
         foreach($dogs as $record)
         {
-            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'];
-            echo "<br>";
+            $petId = "dog_".$record['dogid'];
+            
+            echo "<form action='cart.php'>";
+            
+            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'].str_repeat('&nbsp;', 10);
+            
+            echo "<input type='hidden' name='petId' value='".$petId."'>";                
+            echo "<input type='submit' value='Add to Cart'>";
+            echo "</form>";
+            
+            echo "</br>";
         }
-        echo "<hr> <br>";
+        echo "<hr> </br>";
     }
     else if ($animal == 'cat')
         {
         foreach($cats as $record)
         {
-            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'];
-            echo "<br>";
+            $petId = "cat_".$record['catid'];
+            
+            echo "<form action='cart.php'>";
+
+            echo $record['name'].str_repeat('&nbsp;', 8-strlen($record['name'])).$record['breed'].str_repeat('&nbsp;', 10).$record['gender'].str_repeat('&nbsp;', 10).$record['age'].str_repeat('&nbsp;', 10);
+            
+            echo "<input type='hidden' name='petId' value='".$petId."'>";                
+            echo "<input type='submit' value='Add to Cart'>";
+            echo "</form>";
+            
+            echo "</br>";
         }
-        echo "<hr> <br>";
+        echo "<hr> </br>";
     }
 }
 
@@ -77,23 +104,28 @@ function printOut($animal)
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Pet Store </title>
+        <title> Animal Shelter </title>
     </head>
     <body>
         <h1>
             Pets
         </h1>
-        <br>
+        
+        <form action="cart.php">
+            <input type="submit" value="Adoption Cart">
+        </form>
+            
+            </br>
         <form>
             <input type = 'radio'>
-        <h1>Dogs</h1>
+        </form>
+        
+        <h2>Dogs</h2>
         <?=printOut(dog)?>
-        <h1>Cats</h1>
+        <h2>Cats</h2>
         <?=printOut(cat)?>
-        <h1>Fish</h1>
+        <h2>Fish</h2>
         <?=printOut(fish)?>
         
-        
-        </form>
     </body>
 </html>
