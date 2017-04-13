@@ -28,57 +28,6 @@ $dogSql = "SELECT * from dog";
 $catSql = "SELECT * from cat";
 $fishSql = "SELECT * from fish";
 
-
-
-    if (isset($_GET['breed']))
-    {
-        $dogSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
-        $catSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
-        $fishSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
-    }
-
-
-    if (isset($_GET['alpha']))
-    {
-        $dogSql = $dogSql . " ORDER BY ";
-        $catSql = $catSql . " ORDER BY ";
-        $fishSql = $fishSql . " ORDER BY ";
-        if($_GET['alpha'] =='gender'){
-            $dogSql.= "gender";
-            $catSql.= "gender";
-            $fishSql.= "gender";
-        }
-        else{
-             $dogSql.="breed";
-             $catSql.="breed";
-             $fishSql.="breed";
-        }
-        if(isset($_GET['age']))
-        {
-            $dogSql.= ", age";
-            $catSql.= ", age";
-        }
-    }
-    else
-    {
-
-        if(isset($_GET['age']))
-        {
-            $dogSql.= " ORDER BY age";
-            $catSql.= " ORDER BY age";
-        }
-        
-    }
-    
-   
-    //  else{
-    //      $dogSql.="ORDER BY breed";
-    //      $catSql.="ORDER BY breed";
-    //      $fishSql.="ORDER BY breed";
-    //  }
-
-
-
 $statement = $conn->prepare($dogSql);
 $statement->execute();
 $dogs = $statement->fetchAll(PDO::FETCH_ASSOC); //dogs
@@ -91,18 +40,11 @@ $statement = $conn->prepare($fishSql);
 $statement->execute();
 $fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
 
-
-
-
 //print_r($records);
 
 function printOut($animal)
 {
-    global $dogs, $cats, $fishs, $conn;
-    
-   
- 
-     
+    global $dogs, $cats, $fishs;
     if ($animal == 'fish')
     {
         echo "<table class= 'speciesTable'>";
@@ -117,7 +59,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
            
-           echo "<td> <a href='description.php?fishid=" . $record['fishid'] . "'>". $record['breed']."</td><td>".$record['gender']."</td>"; 
+            echo "<td>". $record['breed']."</td><td>".$record['gender']."</td>"; 
            echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
@@ -144,7 +86,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
             
-            echo "<td> <a href='description.php?dogid=" . $record['dogid'] . "'>" .$record['name']."</a></td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td>" .$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -158,7 +100,7 @@ function printOut($animal)
     }
     else if ($animal == 'cat')
         {
-        echo "<table class= 'speciesTable'>";
+            echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<th>Name</th>";
         echo "<th>Breed</th>";
@@ -172,7 +114,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
 
-            echo "<td> <a href='description.php?catid=" . $record['catid'] . "'>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -184,10 +126,7 @@ function printOut($animal)
         }
         echo "</table><hr> </br>";
     }
-
 }
-
-
 
 ?>
 <!DOCTYPE html>
@@ -205,7 +144,7 @@ function printOut($animal)
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
      
-    <style> @import url("styles.css") </style>
+    <style> @import url("styles.css"); </style>
     
     <body>
         <div id= "wrapper">
@@ -220,17 +159,7 @@ function printOut($animal)
             
             </br>
         <form>
-            <br><br>
-            Search: <input type = "text" name="breed"/>
-            <input type ="submit" value="Search" />
-            <br><br>
-            Sort: <input type = "radio"name="alpha" id="alpha" value="breed"/>
-            <label for="alpha" > Alphabetical</label>
-            <input type="radio" name="alpha" id="gender" value = "gender"/>
-            <label for="gender"> Gender</label>
-            <input type="checkbox" name="age" id="age"/>
-            <label for="age"> Age </label>
-            <input type ="submit" value="Go" />
+            <input type = 'radio'>
         </form>
         
         <h2>Dogs</h2>
