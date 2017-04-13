@@ -93,9 +93,11 @@ function printCart(){
     echo "<table id= 'cartTable'>";
     $selectedPet= $record['breed'];
     
-    echo "<tr>";
-    echo "<td rowspan='$rowHeight'><img src='img/$selectedPet.jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
+    $types= $type."s";
     
+    echo "<tr>";
+    echo "<td rowspan='$rowHeight'><img src='img/$types/$id.jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
+   
     if($type=="dog" || $type=="cat"){
         echo "<td><strong>Name: </strong></td><td>". $record['name'] ."</td></tr> ";
         echo "<tr><td><strong>Breed: </strong></td><td>" . $selectedPet . "</td></tr>";
