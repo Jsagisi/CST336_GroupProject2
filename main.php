@@ -30,26 +30,40 @@ $fishSql = "SELECT * from fish";
 
 
 
-if(isset($_GET['age'])){
-        $dogSql.= "age ASC";
-        $catSql.= "age ASC";
-        $fishSql.= "age ASC";
-   }
+
     if (isset($_GET['alpha'])){
         $dogSql = $dogSql . " ORDER BY ";
         $catSql = $catSql . " ORDER BY ";
         $fishSql = $fishSql . " ORDER BY ";
         if($_GET['alpha'] =='gender'){
-            $dogSql.= "gender ASC";
-            $catSql.= "gender ASC";
-            $fishSql.= "gender ASC";
+            $dogSql.= "gender";
+            $catSql.= "gender";
+            $fishSql.= "gender";
         }
         else{
-             $dogSql.="breed ASC";
-             $catSql.="breed ASC";
-             $fishSql.="breed ASC";
+             $dogSql.="breed";
+             $catSql.="breed";
+             $fishSql.="breed";
+        }
+        if(isset($_GET['age']))
+        {
+            $dogSql.= ", age";
+            $catSql.= ", age";
         }
     }
+    else
+    {
+        $dogSql = $dogSql . " ORDER BY ";
+        $catSql = $catSql . " ORDER BY ";
+        if(isset($_GET['age']))
+        {
+            $dogSql.= " age";
+            $catSql.= " age";
+        }
+        
+    }
+    
+   
     //  else{
     //      $dogSql.="ORDER BY breed";
     //      $catSql.="ORDER BY breed";
