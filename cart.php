@@ -149,7 +149,7 @@ function printCart(){
             
             printCart();
         ?>
-
+        
         <form action="main.php" >
             <input type="submit" value="Back to Main" class= "backButton"/>
         </form>

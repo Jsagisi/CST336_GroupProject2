@@ -81,7 +81,7 @@
         echo "<br><br><br><br><div id='wrapper'>";
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
-
+        echo "<td rowspan=6><img src='img/fishs/" . $fishs[fishid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
         echo "<th>Breed</th>";
         echo "<th>Gender</th>";
         echo "<th>Color</th>";
