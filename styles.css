@@ -6,6 +6,9 @@
 }
 
 body{
+    background-image: url("img/petsBG.jpg") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
 font-family: "Serif";
 font-size: 16px;
 color:black;
@@ -15,14 +18,25 @@ padding-bottom: 1em;
 line-height: 115%;
 }
 
+.errorMSG{
+    color: red;
+    font-size: 20px;
+}
+
 h1{
     font-size: 32px;
     font-weight: bold;
+    padding-top: 1em;
 }
 
 h2{
    font-size: 24px;
     font-weight:bold;
+}
+
+hr{
+    border-color: grey;
+    border-style: ridge;
 }
 
 .speciesTable{
@@ -31,13 +45,46 @@ h2{
     margin-right:auto;
 }
 
+#cartTable{
+    margin-left:auto; 
+    margin-right:auto;
+   border: solid;
+   border-collapse: separate; 
+   border-color: grey;
+   border-width: 2px;
+   border-radius: 15px;
+   width: 485px;
+}
+
+#cartTable td{
+    text-align: left;
+    padding: .4em;
+}
+
+#petIMG{
+    width: 200px;
+}
+
 td,th{
     padding: .25em;
     text-align: center;
 
 }
 
+.backButton{
+    background-color: #FFAF40;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 .cartButton{
-    float: right;
-    margin-right: 5em;
+    float: left;
+    margin-left: 5em;
+    background-color: #FFAF40;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 16px;
 }
