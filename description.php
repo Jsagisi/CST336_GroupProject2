@@ -37,6 +37,10 @@
         $dogs = $statement->fetch(PDO::FETCH_ASSOC); //dogs
         
         echo "<br><br><br><br><div id='wrapper'>";
+        
+        echo "<h1>Pet Information</h1><hr>";
+
+        
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<td rowspan=6><img src='img/dogs/" . $dogs[dogid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
@@ -49,7 +53,6 @@
         echo "</tr>";
         
         echo "<td>".$dogs['name']."</td> <td>".$dogs['breed']."</td> <td>".$dogs['gender']."</td> <td>".$dogs[age]."</td> <td>".$dogs['color']."</td> <td>".$dogs['description'];
-        echo "</div>";
     }
     else if (isset($_GET['catid']))
     {
@@ -70,7 +73,6 @@
         echo "</tr>";
         
         echo "<td>".$cats['name']."</td> <td>".$cats['breed']."</td> <td>".$cats['gender']."</td> <td>".$cats[age]."</td> <td>".$cats['color']."</td> <td>".$cats['description'];
-        echo "</div>";
     }
     else if (isset($_GET['fishid']))
     {
@@ -89,8 +91,8 @@
         echo "</tr>";
         
         echo "<td>".$fishs['breed']."</td> <td>".$fishs['gender']."</td> <td>".$fishs['color']."</td> <td>".$fishs['description'];
-        echo "</div>";
     }
+    echo "</div>";
     
     
 ?>
@@ -100,7 +102,7 @@
     <head>
         <title> Description </title>
         <style>
-            @import url("styles.css")
+            @import url("styles.css");
         </style>
     </head>
     <body>
