@@ -28,28 +28,9 @@ $dogSql = "SELECT * from dog";
 $catSql = "SELECT * from cat";
 $fishSql = "SELECT * from fish";
 
-$statement = $conn->prepare($dogSql);
-$statement->execute();
-$dogs = $statement->fetchAll(PDO::FETCH_ASSOC); //dogs
-
-$statement = $conn->prepare($catSql);
-$statement->execute();
-$cats = $statement->fetchAll(PDO::FETCH_ASSOC); // cats
-
-$statement = $conn->prepare($fishSql);
-$statement->execute();
-$fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
 
 
-
-
-//print_r($records);
-
-function printOut($animal)
-{
-    global $dogs, $cats, $fishs, $conn;
-    
-   if(isset($_GET['age'])){
+if(isset($_GET['age'])){
         $dogSql.= "age ASC";
         $catSql.= "age ASC";
         $fishSql.= "age ASC";
@@ -74,7 +55,32 @@ function printOut($animal)
     //      $catSql.="ORDER BY breed";
     //      $fishSql.="ORDER BY breed";
     //  }
-    echo $dogSql;
+
+
+
+$statement = $conn->prepare($dogSql);
+$statement->execute();
+$dogs = $statement->fetchAll(PDO::FETCH_ASSOC); //dogs
+
+$statement = $conn->prepare($catSql);
+$statement->execute();
+$cats = $statement->fetchAll(PDO::FETCH_ASSOC); // cats
+
+$statement = $conn->prepare($fishSql);
+$statement->execute();
+$fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
+
+
+
+
+//print_r($records);
+
+function printOut($animal)
+{
+    global $dogs, $cats, $fishs, $conn;
+    
+   
+ 
      
     if ($animal == 'fish')
     {
@@ -131,7 +137,7 @@ function printOut($animal)
     }
     else if ($animal == 'cat')
         {
-            echo "<table class= 'speciesTable'>";
+        echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<th>Name</th>";
         echo "<th>Breed</th>";
@@ -193,15 +199,17 @@ function printOut($animal)
             
             </br>
         <form>
+            <br><br>
             Search: <input type = "text" name="breed"/>
             <input type ="submit" value="Search" />
+            <br><br>
             Sort: <input type = "radio"name="alpha" id="alpha" value="breed"/>
             <label for="alpha" > Alphabetical</label>
             <input type="radio" name="alpha" id="gender" value = "gender"/>
             <label for="gender"> Gender</label>
             <input type="checkbox" name="age" id="age"/>
             <label for="age"> Age </label>
-
+            <input type ="submit" value="Go" />
         </form>
         
         <h2>Dogs</h2>
