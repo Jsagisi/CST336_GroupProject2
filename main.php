@@ -28,6 +28,8 @@ $dogSql = "SELECT * from dog";
 $catSql = "SELECT * from cat";
 $fishSql = "SELECT * from fish";
 
+
+
 $statement = $conn->prepare($dogSql);
 $statement->execute();
 $dogs = $statement->fetchAll(PDO::FETCH_ASSOC); //dogs
@@ -40,10 +42,38 @@ $statement = $conn->prepare($fishSql);
 $statement->execute();
 $fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
 
+
 //print_r($records);
 
 function printOut($animal)
 {
+    
+   if(isset($_GET['age'])){
+        $dogSql.= "age ASC";
+        $catSql.= "age ASC";
+        $fishSql.= "age ASC";
+   }
+    if (isset($_GET['alpha'])){
+        $dogSql = $dogSql . " ORDER BY ";
+        $catSql = $catSql . " ORDER BY ";
+        $fishSql = $fishSql . " ORDER BY ";
+        if($_GET['alpha'] =='gender'){
+            $dogSql.= "gender ASC";
+            $catSql.= "gender ASC";
+            $fishSql.= "gender ASC";
+        }
+        else{
+             $dogSql.="breed ASC";
+             $catSql.="breed ASC";
+             $fishSql.="breed ASC";
+        }
+    }
+     else{
+         $dogSql.="ORDER BY breed";
+         $catSql.="ORDER BY breed";
+         $fishSql.="ORDER BY breed";
+     }
+     
     global $dogs, $cats, $fishs;
     if ($animal == 'fish')
     {
@@ -126,7 +156,10 @@ function printOut($animal)
         }
         echo "</table><hr> </br>";
     }
+
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -159,11 +192,14 @@ function printOut($animal)
             
             </br>
         <form>
-            Search: <input type = "text" name="petName"/>
+            Search: <input type = "text" name="breed"/>
+            <input type ="submit" value="Search" />
             Sort: <input type = "radio"name="alpha" id="alpha" value="breed"/>
             <label for="alpha" > Alphabetical</label>
             <input type="radio" name="alpha" id="gender" value = "gender"/>
             <label for="gender"> Gender</label>
+            <input type="checkbox" name="age" id="age"/>
+            <label for="age"> Age </label>
         </form>
         
         <h2>Dogs</h2>
