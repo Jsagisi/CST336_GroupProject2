@@ -28,8 +28,6 @@ $dogSql = "SELECT * from dog";
 $catSql = "SELECT * from cat";
 $fishSql = "SELECT * from fish";
 
-
-
 $statement = $conn->prepare($dogSql);
 $statement->execute();
 $dogs = $statement->fetchAll(PDO::FETCH_ASSOC); //dogs
@@ -43,10 +41,13 @@ $statement->execute();
 $fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
 
 
+
+
 //print_r($records);
 
 function printOut($animal)
 {
+    global $dogs, $cats, $fishs, $conn;
     
    if(isset($_GET['age'])){
         $dogSql.= "age ASC";
@@ -68,13 +69,13 @@ function printOut($animal)
              $fishSql.="breed ASC";
         }
     }
-     else{
-         $dogSql.="ORDER BY breed";
-         $catSql.="ORDER BY breed";
-         $fishSql.="ORDER BY breed";
-     }
+    //  else{
+    //      $dogSql.="ORDER BY breed";
+    //      $catSql.="ORDER BY breed";
+    //      $fishSql.="ORDER BY breed";
+    //  }
+    echo $dogSql;
      
-    global $dogs, $cats, $fishs;
     if ($animal == 'fish')
     {
         echo "<table class= 'speciesTable'>";
@@ -89,7 +90,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
            
-            echo "<td>". $record['breed']."</td><td>".$record['gender']."</td>"; 
+           echo "<td> <a href='description.php?fishid=" . $record['fishid'] . "'>". $record['breed']."</td><td>".$record['gender']."</td>"; 
            echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
@@ -116,7 +117,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
             
-            echo "<td>" .$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td> <a href='description.php?dogid=" . $record['dogid'] . "'>" .$record['name']."</a></td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -144,7 +145,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
 
-            echo "<td>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td> <a href='description.php?catid=" . $record['catid'] . "'>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -200,6 +201,7 @@ function printOut($animal)
             <label for="gender"> Gender</label>
             <input type="checkbox" name="age" id="age"/>
             <label for="age"> Age </label>
+
         </form>
         
         <h2>Dogs</h2>
