@@ -159,7 +159,11 @@ function printOut($animal)
             
             </br>
         <form>
-            <input type = 'radio'>
+            Search: <input type = "text" name="petName"/>
+            Sort: <input type = "radio"name="alpha" id="alpha" value="breed"/>
+            <label for="alpha" > Alphabetical</label>
+            <input type="radio" name="alpha" id="gender" value = "gender"/>
+            <label for="gender"> Gender</label>
         </form>
         
         <h2>Dogs</h2>
