@@ -77,6 +77,15 @@ td,th{
     padding: 5px;
     font-weight: bold;
     font-size: 16px;
+    border-radius: 10px;
+}
+
+.searchButton{
+    background-color: #5F42FF;
+    color: white;
+    font-weight: bold;
+    margin-left: 1em;
+    border-radius: 5px;
 }
 
 .cartButton{
@@ -87,4 +96,6 @@ td,th{
     padding: 5px;
     font-weight: bold;
     font-size: 16px;
+    border-radius: 10px;
+
 }
