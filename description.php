@@ -29,7 +29,7 @@
     $catSql = "SELECT * from cat where catid = " . $_GET['catid'];
     $fishSql = "SELECT * from fish where fishid = " . $_GET['fishid'];
 
-    echo  $_GET['dogid'];
+
     if (isset($_GET['dogid']))
     {
         $statement = $conn->prepare($dogSql);
@@ -39,6 +39,7 @@
         echo "<br><br><br><br><div id='wrapper'>";
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
+        echo "<td rowspan=6><img src='img/dogs/" . $dogs[dogid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
         echo "<th>Name</th>";
         echo "<th>Breed</th>";
         echo "<th>Gender</th>";
@@ -59,6 +60,7 @@
         echo "<br><br><br><br><div id='wrapper'>";
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
+        echo "<td rowspan=6><img src='img/cats/" . $cats[catid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
         echo "<th>Name</th>";
         echo "<th>Breed</th>";
         echo "<th>Gender</th>";
