@@ -14,7 +14,7 @@ function getDBConnection($dbname) {
     }
     catch (PDOException $e) {
         
-        echo "There was some problem connecting to the database! Error: $e";
+        echo "<span class='errorMSG'>There was some problem connecting to the database! Error: $e</span>";
         exit();
         
     }
@@ -149,8 +149,9 @@ function printOut($animal)
     <body>
         <div id= "wrapper">
         <h1>
-            Pets
+            Pet Adoption
         </h1>
+        <hr>
         
         <form action="cart.php">
             <input type="submit" value="Adoption Cart" class= "cartButton">
