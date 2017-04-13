@@ -61,6 +61,8 @@
         $cats = $statement->fetch(PDO::FETCH_ASSOC); // cats
         
         echo "<br><br><br><br><div id='wrapper'>";
+        echo "<h1>Pet Information</h1><hr>";
+
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<td rowspan=6><img src='img/cats/" . $cats[catid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
@@ -81,6 +83,8 @@
         $fishs = $statement->fetch(PDO::FETCH_ASSOC); // fish
         
         echo "<br><br><br><br><div id='wrapper'>";
+        echo "<h1>Pet Information</h1><hr>";
+
         echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<td rowspan=6><img src='img/fishs/" . $fishs[fishid] . ".jpg' id= 'petIMG' alt='Adopted_Pet' /></td>";
