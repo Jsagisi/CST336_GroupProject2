@@ -24,9 +24,73 @@ function getDBConnection($dbname) {
 }
 
 $conn = getDBConnection("pet_store");
-$dogSql = "SELECT * from dog";
-$catSql = "SELECT * from cat";
-$fishSql = "SELECT * from fish";
+$dogSql = "SELECT * from dog WHERE 1";
+$catSql = "SELECT * from cat WHERE 1";
+$fishSql = "SELECT * from fish WHERE 1";
+
+
+    if (!empty($_GET['name']))
+    {
+        $dogSql .= " AND name like '%" . $_GET['name'] . "%'";
+        $catSql .= " AND name like '%" . $_GET['name'] . "%'";
+        $fishSql .= " AND fishid like 0";
+    }
+    
+    if (!empty($_GET['breed']))
+    {
+        $dogSql .= " AND breed like '%" . $_GET['breed'] . "%'";
+        $catSql .= " AND breed like '%" . $_GET['breed'] . "%'";
+        $fishSql .= " AND breed like '%" . $_GET['breed'] . "%'";
+    }
+    
+    if (!empty($_GET['ageSearch']))
+    {
+        $dogSql .= " AND age like " . $_GET['ageSearch'];
+        $catSql .= " AND age like " . $_GET['ageSearch'];
+        $fishSql .= " AND fishid like 0";
+    }
+
+
+    if (isset($_GET['alpha']))
+    {
+        $dogSql = $dogSql . " ORDER BY ";
+        $catSql = $catSql . " ORDER BY ";
+        $fishSql = $fishSql . " ORDER BY ";
+        if($_GET['alpha'] =='gender'){
+            $dogSql.= "gender";
+            $catSql.= "gender";
+            $fishSql.= "gender";
+        }
+        else{
+             $dogSql.="breed";
+             $catSql.="breed";
+             $fishSql.="breed";
+        }
+        if(isset($_GET['age']))
+        {
+            $dogSql.= ", age";
+            $catSql.= ", age";
+        }
+    }
+    else
+    {
+
+        if(isset($_GET['age']))
+        {
+            $dogSql.= " ORDER BY age";
+            $catSql.= " ORDER BY age";
+        }
+        
+    }
+    
+   
+    //  else{
+    //      $dogSql.="ORDER BY breed";
+    //      $catSql.="ORDER BY breed";
+    //      $fishSql.="ORDER BY breed";
+    //  }
+
+
 
 $statement = $conn->prepare($dogSql);
 $statement->execute();
@@ -40,11 +104,18 @@ $statement = $conn->prepare($fishSql);
 $statement->execute();
 $fishs = $statement->fetchAll(PDO::FETCH_ASSOC); // fish
 
+
+
+
 //print_r($records);
 
 function printOut($animal)
 {
-    global $dogs, $cats, $fishs;
+    global $dogs, $cats, $fishs, $conn;
+    
+   
+ 
+     
     if ($animal == 'fish')
     {
         echo "<table class= 'speciesTable'>";
@@ -59,7 +130,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
            
-            echo "<td>". $record['breed']."</td><td>".$record['gender']."</td>"; 
+           echo "<td> <a href='description.php?fishid=" . $record['fishid'] . "'>". $record['breed']."</td><td>".$record['gender']."</td>"; 
            echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
             echo "<input type='submit' value='Add to Cart'>";
@@ -86,7 +157,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
             
-            echo "<td>" .$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td> <a href='description.php?dogid=" . $record['dogid'] . "'>" .$record['name']."</a></td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -100,7 +171,7 @@ function printOut($animal)
     }
     else if ($animal == 'cat')
         {
-            echo "<table class= 'speciesTable'>";
+        echo "<table class= 'speciesTable'>";
         echo "<tr>";
         echo "<th>Name</th>";
         echo "<th>Breed</th>";
@@ -114,7 +185,7 @@ function printOut($animal)
             
             echo "<form action='cart.php'>";
 
-            echo "<td>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
+            echo "<td> <a href='description.php?catid=" . $record['catid'] . "'>".$record['name']."</td><td>".$record['breed']."</td><td>".$record['gender']."</td><td>".$record['age']."</td>";
             
             echo "<td>";
             echo "<input type='hidden' name='petId' value='".$petId."'>";                
@@ -126,7 +197,10 @@ function printOut($animal)
         }
         echo "</table><hr> </br>";
     }
+
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -159,7 +233,22 @@ function printOut($animal)
             
             </br>
         <form>
-            <input type = 'radio'>
+            <br><br>
+            Search Name: <input type = "text" name="name"/>
+            <br><br>
+            Search Breed/Species: <input type = "text" name="breed"/>
+            
+            <br><br>
+            Search Age: <input type = "text" name="ageSearch"/>
+            <br><br>
+            
+            Sort: <input type = "radio" name="alpha" id="alpha" value="breed"/>
+            <label for="alpha" > Alphabetical</label>
+            <input type="radio" name="alpha" id="gender" value = "gender"/>
+            <label for="gender"> Gender</label>
+            <input type="checkbox" name="age" id="age"/>
+            <label for="age"> Age </label>
+            <input type ="submit" value="Search" class= "searchButton"/>
         </form>
         
         <h2>Dogs</h2>
@@ -168,6 +257,7 @@ function printOut($animal)
         <?=printOut(cat)?>
         <h2>Fish</h2>
         <?=printOut(fish)?>
+        </br></br>
         </div>
     </body>
 </html>
