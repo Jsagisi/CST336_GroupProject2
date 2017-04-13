@@ -30,6 +30,13 @@ $fishSql = "SELECT * from fish";
 
 
 
+    if (isset($_GET['breed']))
+    {
+        $dogSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
+        $catSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
+        $fishSql .= " WHERE breed like '" . $_GET['breed'] . "%'";
+    }
+
 
     if (isset($_GET['alpha']))
     {
